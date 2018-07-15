@@ -1,0 +1,24 @@
+extends ../layout.pug
+block append head
+  link(rel='stylesheet',href='/css/create_invite.css')
+block content
+  .invite
+    h2 New Invite
+    form(method='POST',action='/invites/'+ user.username + '/create')
+      .form-group
+        input(type='text',name='username',placeholder="Invitee's Username")
+      .form-group
+        input(type='text',name='title',placeholder='Title')
+      .form-group
+        input(type='text',name='description',placeholder='Description')
+      .form-group
+        label Date:
+        input(type='date',name='date')
+      .form-group
+        label Start Time:
+        input(type='time',name='starttime')
+      .form-group
+        label End Time:
+        input(type='time',name='endtime')
+      .form-group  
+        button(type='submit') Send Invite

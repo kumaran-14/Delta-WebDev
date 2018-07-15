@@ -1,0 +1,43 @@
+extends ../layout.pug
+block append head
+  link(rel='stylesheet',href='/css/appointments_today.css')
+  link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.1.0/css/all.css', integrity='sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt', crossorigin='anonymous')
+
+block content
+  if (appointments.length != 0)
+    each appointment, index in appointments
+      .card
+        .card-header
+          .control
+            span.control-icon#delete(data-id=appointment.id, data-username = user.username)
+              i.fas.fa-trash-alt
+            span.control-icon
+              a(href='/appointments/'+ user.username +'/edit/' + appointment.id)
+                i.fas.fa-pen
+          h4 #{appointment.title}
+        .card-body
+          .row
+            span.icon
+              i.far.fa-clock
+            span
+              -var d = new Date(appointment.year,appointment.month-1,appointment.day)
+              p.date #{d.toLocaleString('en-us',{weekday:'long'})}, #{appointment.day} #{d.toLocaleString('en-us',{month:'long'})}
+              p.time #{appointment.starttime} - #{appointment.endtime}
+          .row
+            span.icon
+              i.far.fa-comment
+            span
+              p #{appointment.description}
+          .row
+            span.icon
+              i.far.fa-user
+            span
+              p #{user.username}
+  else
+    .no-appointment
+      h4 You have no appointments for today.
+  a(href='/appointments/'+ user.username +'/create')
+    button.press(type = 'submit') New Appointment
+block script
+  script(src="/js/delete.js")
+  

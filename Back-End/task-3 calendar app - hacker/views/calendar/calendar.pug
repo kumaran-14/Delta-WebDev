@@ -1,0 +1,63 @@
+extends ../layout.pug
+block append head
+  link(rel='stylesheet',href='/css/display_calendar.css')
+block content
+  table.container
+    thead
+      tr
+        td(colspan="2")
+          button.pagination.prev(type = 'button') PREVIOUS
+        td(colspan="3") July 2018
+        td(colspan="2")
+          button.pagination.next(type = 'button') NEXT
+    tbody
+      tr.days
+        td Sun
+        td Mon
+        td Tue
+        td Wed
+        td Thu
+        td Fri
+        td Sat
+      tr
+        td.today 1
+        td.normal 2
+        td.normal 3
+        td.normal 4
+        td.normal 5
+        td.normal 6
+        td.normal 7
+      tr
+        td.normal 8
+        td.normal 9
+        td.normal 10
+        td.normal 11
+        td.normal 12
+        td.normal 13
+        td.normal 14
+      tr
+        td.normal 15
+        td.normal 16
+        td.normal 17
+        td.normal 18
+        td.normal 19
+        td.normal 20
+        td.normal 21
+      tr
+        td.normal 22
+        td.normal 23
+        td.normal 24
+        td.normal 25
+        td.normal 26
+        td.normal 27
+        td.normal 28
+      tr
+        td.normal 29
+        td.normal 30 
+          br
+          p &Rarr; hahaha lolol
+        td.normal 31
+        td.not-current 1
+        td.not-current 2
+        td.not-current 3
+        td.not-current 4

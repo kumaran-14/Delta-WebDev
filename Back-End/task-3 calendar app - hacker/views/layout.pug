@@ -1,0 +1,37 @@
+doctype html
+html
+  head
+    block head
+      title Calender
+      meta(name="viewport", content="width=device-width, initial-scale=1, shrink-to-fit=no")
+      link(href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet")
+      link(rel='stylesheet',href='/css/layout.css')
+  body
+    ul.fixed-nav
+      - var date = new Date
+      - var username = ''
+      if (user)
+        - username = user.username
+      li
+        a(href = '/calendar/'+ username +'/'+ date.getFullYear() + '/' + date.getMonth()) Calendar
+      li
+        a(href= '/invites/'+ username +'/') Invite
+      li
+        a(href='/appointments/'+ username +'/create') Create Appointment
+      if (!user)
+        li
+          a(href='/user/login') Login
+        li
+          a(href='/user/register') Register
+      else
+        li
+          a(href='/user/logout') Logout
+    main
+      block content
+    footer
+      span Terms | Privacy | Feedback: kumarangowrisankar@yahoo.in
+      span &copy; CrazyCalendar 2018 - 2019
+    block script
+
+
+

@@ -1,0 +1,61 @@
+extends ../layout.pug
+mixin displayAppointments(apps,thisDay)
+  if(apps)
+    each appointment, index in apps
+      if(appointment.day == thisDay)
+        p &Rarr; #{appointment.title}
+block append head
+  link(rel='stylesheet',href='/css/display_calendar.css')
+block content
+  table.container
+    thead(data-year = year, data-month = month, data-username = user.username)
+      tr
+        td(colspan="2")
+          button.pagination.prev(type = 'button') PREVIOUS
+        td(colspan="3") #{monthName} #{year}
+        td(colspan="2")
+          button.pagination.next(type = 'button') NEXT
+    tbody
+      tr.days
+        each day,i in daysOfWeek
+          td= day
+      //- i -> date, j -> week, k -> weekday, l -> previousMonth's date, m -> nextMonth's date
+      - var i = 1
+      //- for each of the 5 or 6 weeks in a month 
+      - for(var j = 0; j < 6; j++)
+        tr
+          //- for each day in a week
+          -for(var k = 0;k < 7;k++)
+            - var dow = new Date(year,month,i).getDay()
+            //- displaying the dates of previousMonth
+            if(k == 0 && i == 1)
+              - var x = lastDateOfLastMonth - dow + 1;
+              - for(var l = 0; l < dow; ++l,x++,k++)
+                td.not-current= x
+            //- displaying today's date with special emphasis
+            if (year == currYear && month == currMonth && i == currDay)
+              td.today(data-date=i)= i
+                +displayAppointments(appointments,i)
+              - i++
+              //- displaying the dates of nextMonth
+            else if (i == lastDateOfMonth + 1)
+              if (dow != 0)
+                - var m = 1
+                - for(dow;dow <= 6;dow++,k++)
+                  td.not-current= m
+                  - m++
+              //- preventing creation of a new row if month has only 5 weeks  
+              -j = 5
+            //- displaying dates
+            else
+              td.normal(data-date=i)= i
+                +displayAppointments(appointments,i)
+              - i++
+  div.specific
+    p Specific date
+    form
+      input(type="month",value = year+'-0' + (month+1))
+      button.press(type = 'submit') GO
+block script
+  script(src="/js/pagination.js")
+  

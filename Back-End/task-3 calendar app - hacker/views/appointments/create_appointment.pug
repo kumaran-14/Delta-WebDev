@@ -1,0 +1,22 @@
+extends ../layout.pug
+block append head
+  link(rel='stylesheet',href='/css/create_appointment.css')
+block content
+  .appointment
+    h2 Create new appointment
+    form(method='POST',action='/appointments/'+ user.username +'/create')
+      .form-group
+        input(type='text',name='title',placeholder='Title')
+      .form-group
+        input(type='text',name='description',placeholder='Description')
+      .form-group
+        label Date:
+        input(type='date',name='date')
+      .form-group
+        label Start Time:
+        input(type='time',name='starttime')
+      .form-group
+        label End Time:
+        input(type='time',name='endtime')
+      .form-group  
+        button(type='submit') ADD

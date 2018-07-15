@@ -1,0 +1,35 @@
+extends ../layout.pug
+
+block append head
+  link(rel='stylesheet',href='/css/display_invites.css')
+  link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.1.0/css/all.css', integrity='sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt', crossorigin='anonymous')
+  
+block content
+  if (invites.length != 0)
+    each invite, index in invites
+      .card
+        .card-header
+          h4 #{invite.title}
+        .card-body
+          .row
+            span.icon
+              i.far.fa-clock
+            span
+              -var d = new Date(invite.year,invite.month-1,invite.day)
+              p.date #{d.toLocaleString('en-us',{weekday:'long'})}, #{invite.day} #{d.toLocaleString('en-us',{month:'long'})}
+              p.time #{invite.starttime} - #{invite.endtime}
+          .row
+            span.icon
+              i.far.fa-comment
+            span
+              p #{invite.description}
+          .row
+            span.icon
+              i.far.fa-user
+            span
+              p #{invite.fromuser}
+  else 
+    .no-invite
+      h4 You have no invites yet.
+  a(href='/invites/'+ user.username +'/create')
+    button.press(type = 'submit') New Invite

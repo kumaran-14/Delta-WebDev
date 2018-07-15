@@ -1,0 +1,9 @@
+extends layout.pug
+block content
+  if(user)
+    p #{user.username}
+  a(href='/') Home
+  a(href='/secure') Secure
+  a(href='/appointments/create') Create appointment
+  a(href='/user/register') Register
+  a(href='/user/login') Login

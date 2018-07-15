@@ -1,0 +1,26 @@
+extends ../layout.pug
+block append head
+  link(rel='stylesheet',href='/css/edit_appointment.css')
+block content
+  .appointment
+    h2 Edit Appointment
+    form(method='POST',action='/appointments/'+ user.username +'/edit/' + appointment._id)
+      .form-group
+        input(type='text',name='title',value=appointment.title)
+      .form-group
+        input(type='text',name='description',value=appointment.description)
+      .form-group
+        label Date:
+        input(type='date',name='date',value=appointment.date)
+      .form-group
+        label Start Time:
+        input(type='time',name='starttime',value=appointment.starttime)
+      .form-group
+        label End Time:
+        input(type='time',name='endtime',value=appointment.endtime)
+      .form-group#buttons
+        button(type='submit') CONFIRM
+        button#delete(type='submit' data-id = appointment.id, data-username = user.username) DELETE
+block script
+  script(src="/js/delete.js")
+  
