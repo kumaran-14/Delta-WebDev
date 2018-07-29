@@ -12,19 +12,19 @@ var scoreCounter = 0;
 // creating walls and obstacles and starting game
 function startGame() {
 	// initialising playerDeep as a circle
-	playerDeep = new Item(config.deep.x, config.deep.y,config.deep.width,config.deep.height, "#76FF03", "player"); 
+	playerDeep = new Item(config.deep.x, config.deep.y,config.deep.width,config.deep.height, "#76FF03", "player");
 
 	// initialising the texts to display on screen
 	displayScore = new Item(config.gameText.score.x, config.gameText.score.y, "17px", "Verdana", "#f5df65", "text");
 	gameName = new Item(config.gameText.gameName.x,	config.gameText.gameName.y,"bold 34px","Courier New","#FF3D00","text");
 	displayInstruction = new Item(config.gameText.instruction.x,config.gameText.instruction.y,"12px","Arial","#E1F5FE","text");
 	gameOver = new Item(config.gameText.gameOver.x,config.gameText.gameOver.y,"38px","Times New Roman","#FBC02D","text");
-	
+
 	// initialising permanent walls
 	myWalls.push(new Item(config.walls.leftWall.x, config.walls.leftWall.y, config.walls.leftWall.width, config.walls.leftWall.height, "#E91E63")); // left wall
 	myWalls.push(new Item(config.walls.topWall.x, config.walls.topWall.y, config.walls.topWall.width, config.walls.topWall.height, "#E91E63")); // top wall
 	myWalls.push(new Item(config.walls.bottomWall.x, config.walls.bottomWall.y, config.walls.bottomWall.width, config.walls.bottomWall.height,"#E91E63")); // bottom wall
-	
+
 	//  initialising sounds for game
 	loseSound = new Sound("sounds/lose.mp3");
 	themeMusic = new Sound("sounds/theme.mp3");
@@ -167,6 +167,7 @@ function frameInterval(n) {
 	}
 	return false;
 }
+
 // logic variables
 var vx, vy, dx, dy, angle,dt = 16;
 let obstacleCounter = 0;
@@ -183,12 +184,12 @@ function updateLogic(dt){
 				playerDeep.y = gameArena.y - gameArena.canvas.offsetTop;
 			}else {
 				angle = Math.atan2(dy, dx);
-				vx = Math.cos(angle) * config.deep.speed; 
+				vx = Math.cos(angle) * config.deep.speed;
 				vy = Math.sin(angle) * config.deep.speed;
 				playerDeep.x += vx*dt;
 				playerDeep.y += vy*dt;
 			}
-		}	
+		}
 	}
 	if (gameArena.state == "playing") {
 		scoreCounter++;
@@ -203,7 +204,7 @@ function updateLogic(dt){
 				enemyBullets.push( new Item(enemyX+60,enemyY + 9,config.bullet.width,config.bullet.height,"#fd0000"))
 				gameArena.framesPerObstacle = Math.floor(Math.random() * (config.frame.maxFrameLimit - config.frame.minFrameLimit + 1) + config.frame.minFrameLimit); //one obstacle per a randomly computed frame
 				gameArena.frameCounter = 2; //reset frame counter
-					
+
 			}else{
 				let availableHeight = gameArena.canvas.height - (config.walls.topWall.height + config.walls.bottomWall.height);
 				let maxObstacleHeight = availableHeight - 3*config.deep.radius;
@@ -224,7 +225,7 @@ function updateLogic(dt){
 				obstacleX = gameArena.canvas.width;
 				myObstacles.push(	new Item(obstacleX, obstacleY, obstacleWidth, obstacleHeight, "#558ad8"));
 				gameArena.framesPerObstacle = Math.floor(Math.random() * (config.frame.maxFrameLimit - config.frame.minFrameLimit + 1) + config.frame.minFrameLimit); //one obstacle per a randomly computed frame
-				gameArena.frameCounter = 2;	//reset frame counter	
+				gameArena.frameCounter = 2;	//reset frame counter
 			}
 			config.frame.maxFrameLimit *= 0.9995;
 			config.frame.minFrameLimit *= 0.9995
@@ -261,11 +262,9 @@ function updateLogic(dt){
 					scoreCounter+=1000
 					myBullets.splice(myBullets.indexOf(bullet),1);
 					myEnemies.splice(myEnemies.indexOf(enemy),1);
-				}	
+				}
 			})
-			
 		})
-		
 		// Update and draw obstacles
 		myObstacles.forEach(obstacle => {
 			obstacle.x -= config.obstacle.speed*dt;
@@ -275,7 +274,6 @@ function updateLogic(dt){
 		myEnemies.forEach(enemy => {
 			enemy.x -= config.enemy.speed*dt;
 			enemy.draw();
-			
 		});
 		//Update & draw mybullets
 		myBullets.forEach(bullet =>{
@@ -287,7 +285,6 @@ function updateLogic(dt){
 			bullet.x -= config.enemy.bulletSpeed*dt
 			bullet.draw()
 		})
-		
 		if(gameArena.state == "quit"){
 			displayGameOver();
 		}
@@ -297,8 +294,6 @@ function updateLogic(dt){
 		gameName.draw();
 		displayInstruction.draw();
 	}
-	
-
 }
 // render Deep, Walls and score on canvas
 function render(){

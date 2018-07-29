@@ -1,0 +1,51 @@
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    meta(http-equiv="X-UA-Compatible" content="ie=edge")
+    title Dynamic Property Changer
+    link(href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet")
+  body
+    h3.text-center Dynamic Input Changer
+    .wrapper
+      .input
+        .control.color
+          h5 Text Color
+          input.controller(type="range" min="0" max="255" value="128")
+          input.controller(type="range" min="0" max="255" value="128")
+          input.controller(type="range" min="0" max="255" value="128")
+        .control.bgcolor
+          h5 Background Color
+          input.controller(type="range" min="0" max="255" value="128")
+          input.controller(type="range" min="0" max="255" value="128")
+          input.controller(type="range" min="0" max="255" value="128")
+        .control.height
+          h5 Height
+          input.controller(type="range" min="1" max="1000" value="500")
+        .control.width
+          h5 Width
+          input.controller(type="range" min="1" max="700" value="350")
+        .control.border-color
+          h5 Border Color
+          input.controller(type="range" min="0" max="255" value="128")
+          input.controller(type="range" min="0" max="255" value="128")
+          input.controller(type="range" min="0" max="255" value="128")
+      .output
+        p
+          | /*
+          | color:
+          span.text-color rgb(128,128,128);
+          br
+          | background-color:
+          span.bg-color rgb(128,128,128);
+          br
+          | height:
+          span.Height 100px
+          br
+          | width:
+          span.Width 350px
+          br
+          | border-color:
+          span.border-color rgb(128,128,128);
+          br
+          | /*
