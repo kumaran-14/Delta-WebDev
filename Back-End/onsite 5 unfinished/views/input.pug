@@ -1,0 +1,5 @@
+extends ./layout.pug
+block content
+	form(method= 'POST',action = '/')
+		textarea(name='cmd',placeholder='ENTER C++ code')
+		button(type = submit) SUBMIT

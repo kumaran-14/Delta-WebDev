@@ -1,0 +1,36 @@
+html
+	head
+		title Live bidding
+		script(src='/socket.io/socket.io.js')
+		link(rel='stylesheet',href='/css/index.css')
+		script(src='https://code.jquery.com/jquery-3.2.1.min.js')
+		script.
+			$(function () {
+			var socket = io();
+			socket.on('priceupdate', function(obj) {
+				$('#stockprice').text(` ${obj.name} has bidded for ${obj.price} rupees`);
+				$('#timer').text(`${obj.secs}`);
+				console.log(obj.secs)
+				if(obj.secs == 0){
+				console.log(obj)
+				$('#stockprice').text(` ${obj.name} has won the bid for ${obj.price} rupees`);
+				$('#timer').text(`Bidding Over`);
+				$('#form').off()
+				$('#form').addClass("hide")
+
+				}
+			});
+			});
+
+	body(data-name=name)
+		| Item price:
+		span#stockprice Default Price : 1000
+		p#uname User Name: #{name}&nbsp;
+		form#form(method='POST', action='/')
+			input#input(type='text', name='bid', placeholder='price Amount')
+			br
+			button(type='submit', value='Submit')
+				| Bid
+		p Timer: &nbsp;
+			span#timer
+		script(src='/js/ajax.js')
